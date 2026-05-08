@@ -26,27 +26,12 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ===== INTRO ===== */
-#intro{
+/* ===== GALAXY CANVAS ===== */
+canvas{
 position:fixed;
-width:100%;
-height:100vh;
-background:black;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:9999;
-transition:1s;
-}
-
-#intro h1{
-font-size:3rem;
-letter-spacing:6px;
-}
-
-#intro span{
-color:#00f0ff;
+top:0;
+left:0;
+z-index:-2;
 }
 
 /* ===== NAV ===== */
@@ -72,22 +57,27 @@ nav a:hover{
 color:#00f0ff;
 }
 
-/* ===== 3D BACKGROUND ===== */
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-}
-
-/* ===== HERO ===== */
+/* ===== HERO VIDEO ===== */
 .hero{
 height:100vh;
+position:relative;
 display:flex;
-flex-direction:column;
-justify-content:center;
 align-items:center;
+justify-content:center;
 text-align:center;
+overflow:hidden;
+}
+
+#bgVideo{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0.25;
+}
+
+.hero-content{
+z-index:2;
 }
 
 .hero h1{
@@ -101,7 +91,7 @@ color:#00f0ff;
 .hero p{
 opacity:0.7;
 max-width:600px;
-margin-top:20px;
+margin:auto;
 }
 
 /* ===== SECTIONS ===== */
@@ -111,7 +101,7 @@ padding:120px 10%;
 
 h2{
 text-align:center;
-margin-bottom:40px;
+margin-bottom:50px;
 }
 
 /* ===== GRID ===== */
@@ -125,17 +115,38 @@ gap:30px;
 /* ===== CARDS ===== */
 .card{
 background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
 backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.1);
 padding:30px;
 width:300px;
 border-radius:20px;
 transition:0.4s;
+position:relative;
+overflow:hidden;
 }
 
 .card:hover{
 transform:translateY(-10px);
 border-color:#00f0ff;
+}
+
+/* ===== PLAN IMAGES ===== */
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+.card ul{
+margin-top:10px;
+text-align:left;
+opacity:0.8;
+}
+
+.card ul li{
+margin:5px 0;
 }
 
 /* ===== CONTACT CARD ===== */
@@ -153,6 +164,7 @@ transition:0.4s;
 .contact-card:hover{
 transform:scale(1.05);
 border-color:#00f0ff;
+box-shadow:0 0 40px rgba(0,240,255,0.2);
 }
 
 /* ===== BUTTON ===== */
@@ -184,11 +196,8 @@ z-index:1000;
 
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-<h1>KALIBRE <span>LABS</span></h1>
-<p>Loading experience...</p>
-</div>
+<!-- GALAXY BACKGROUND -->
+<canvas id="bg"></canvas>
 
 <!-- NAV -->
 <nav>
@@ -200,10 +209,16 @@ z-index:1000;
 </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO VIDEO -->
 <section class="hero">
+<video autoplay muted loop id="bgVideo">
+<source src="assets/intro.mp4" type="video/mp4">
+</video>
+
+<div class="hero-content">
 <h1>Kalibre <span>Digital Labs</span></h1>
-<p>We build high-performance websites, branding systems, and digital growth engines for modern businesses.</p>
+<p>We build high-performance websites that convert attention into revenue.</p>
+</div>
 </section>
 
 <!-- SERVICES -->
@@ -213,17 +228,17 @@ z-index:1000;
 
 <div class="card">
 <h3>Website Development</h3>
-<p>Fast, responsive websites designed to convert visitors into clients.</p>
+<p>Fast, modern websites built for conversion.</p>
 </div>
 
 <div class="card">
 <h3>Branding</h3>
-<p>Strong identity systems that position your business as premium.</p>
+<p>Identity systems that position you as premium.</p>
 </div>
 
 <div class="card">
-<h3>Digital Growth</h3>
-<p>SEO, funnels and automation systems to scale revenue.</p>
+<h3>Growth Systems</h3>
+<p>SEO, funnels and automation for scaling.</p>
 </div>
 
 </div>
@@ -235,6 +250,7 @@ z-index:1000;
 <div class="grid">
 
 <div class="card">
+<img src="assets/plan-entry.jpg">
 <h3>🟢 ENTRY</h3>
 <p>R799/month</p>
 <ul>
@@ -247,22 +263,22 @@ z-index:1000;
 </div>
 
 <div class="card">
+<img src="assets/plan-growth.jpg">
 <h3>🔵 GROWTH</h3>
 <p>R1,399/month</p>
 <ul>
-<li>Everything in Entry</li>
-<li>WhatsApp Integration</li>
 <li>Booking System</li>
+<li>WhatsApp Integration</li>
 <li>Lead Tracking</li>
 <li>Reports</li>
 </ul>
 </div>
 
 <div class="card">
+<img src="assets/plan-premium.jpg">
 <h3>🟣 PREMIUM</h3>
 <p>R2,199/month</p>
 <ul>
-<li>Everything in Growth</li>
 <li>Advanced SEO</li>
 <li>Funnels</li>
 <li>Competitor Analysis</li>
@@ -290,51 +306,44 @@ z-index:1000;
 <!-- ===== SCRIPTS ===== -->
 <script>
 
-/* INTRO */
-setTimeout(()=>{
-document.getElementById("intro").style.display="none";
-},3000);
-
-/* ===== 3D BACKGROUND ===== */
+/* ===== GALAXY PARTICLES ===== */
 let scene = new THREE.Scene();
 let camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
-let renderer = new THREE.WebGLRenderer({alpha:true});
+let renderer = new THREE.WebGLRenderer({canvas:document.getElementById("bg"),alpha:true});
 renderer.setSize(window.innerWidth,window.innerHeight);
-document.body.appendChild(renderer.domElement);
 
-let geometry = new THREE.IcosahedronGeometry(2,1);
-let material = new THREE.MeshBasicMaterial({
-color:0x00f0ff,
-wireframe:true
-});
+let starsGeo = new THREE.BufferGeometry();
+let starCount = 3000;
+let pos = [];
 
-let mesh = new THREE.Mesh(geometry,material);
-scene.add(mesh);
+for(let i=0;i<starCount;i++){
+pos.push((Math.random()-0.5)*2000);
+pos.push((Math.random()-0.5)*2000);
+pos.push((Math.random()-0.5)*2000);
+}
 
+starsGeo.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));
+
+let starsMat = new THREE.PointsMaterial({color:0x00f0ff,size:1});
+let stars = new THREE.Points(starsGeo,starsMat);
+
+scene.add(stars);
 camera.position.z = 5;
-
-/* mouse move */
-let mx=0,my=0;
-document.addEventListener("mousemove",(e)=>{
-mx = (e.clientX/window.innerWidth)*2-1;
-my = (e.clientY/window.innerHeight)*2-1;
-});
 
 function animate(){
 requestAnimationFrame(animate);
-mesh.rotation.y += 0.005 + mx*0.002;
-mesh.rotation.x += 0.005 + my*0.002;
+stars.rotation.y += 0.0005;
 renderer.render(scene,camera);
 }
 animate();
 
-/* GSAP ANIMATION */
+/* ===== GSAP ===== */
 gsap.registerPlugin(ScrollTrigger);
 
 gsap.utils.toArray(".card").forEach(el=>{
 gsap.from(el,{
 opacity:0,
-y:50,
+y:60,
 duration:1,
 scrollTrigger:{
 trigger:el,
