@@ -8,8 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <style>
 *{
@@ -25,7 +23,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ===== GALAXY ===== */
+/* ===== GALAXY BACKGROUND ===== */
 canvas{
 position:fixed;
 top:0;
@@ -33,7 +31,7 @@ left:0;
 z-index:-2;
 }
 
-/* ===== SECTIONS (LONG SCROLL) ===== */
+/* ===== SECTIONS ===== */
 section{
 min-height:120vh;
 padding:120px 10%;
@@ -82,7 +80,7 @@ border-color:#00f0ff;
 box-shadow:0 0 40px rgba(0,240,255,0.2);
 }
 
-/* ===== EXPANDED PLAN ===== */
+/* ===== EXPAND ===== */
 .expand{
 display:none;
 margin-top:20px;
@@ -93,7 +91,7 @@ opacity:0.8;
 display:block;
 }
 
-/* ===== CONTACT CARD ===== */
+/* ===== CONTACT ===== */
 .contact-card{
 background:rgba(255,255,255,0.05);
 padding:40px;
@@ -110,7 +108,6 @@ box-shadow:0 0 50px rgba(0,240,255,0.2);
 border-color:#00f0ff;
 }
 
-/* ===== BUTTON ===== */
 .btn{
 margin-top:20px;
 padding:12px 30px;
@@ -158,7 +155,7 @@ SEO & Growth
 </div>
 </section>
 
-<!-- PRICING (EXPANDABLE) -->
+<!-- PRICING -->
 <section>
 <h1>Pricing</h1>
 
@@ -205,12 +202,12 @@ R2199/month<br><br>
 
 <script>
 
-/* ===== EXPAND CARDS ===== */
+/* EXPAND PRICING */
 function toggle(el){
 el.classList.toggle("active");
 }
 
-/* ===== GALAXY ===== */
+/* GALAXY BACKGROUND */
 let scene=new THREE.Scene();
 let camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
 let renderer=new THREE.WebGLRenderer({canvas:document.getElementById("bg"),alpha:true});
@@ -233,7 +230,7 @@ let stars=new THREE.Points(geo,mat);
 scene.add(stars);
 camera.position.z=5;
 
-/* ===== MOUSE REACTIVE MOTION (FIXED) ===== */
+/* MOUSE REACTIVE MOTION */
 let mouseX=0,mouseY=0;
 
 document.addEventListener("mousemove",(e)=>{
