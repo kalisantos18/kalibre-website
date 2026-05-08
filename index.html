@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>KDL Level 7</title>
+<title>Kalibre Digital Labs</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
 
@@ -23,7 +23,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ===== BACKGROUND ===== */
+/* ===== GALAXY ===== */
 canvas{
 position:fixed;
 top:0;
@@ -56,8 +56,8 @@ margin-top:20px;
 /* ===== GRID ===== */
 .grid{
 display:flex;
-gap:30px;
 flex-wrap:wrap;
+gap:30px;
 margin-top:60px;
 }
 
@@ -81,7 +81,7 @@ border-color:#00f0ff;
 box-shadow:0 0 40px rgba(0,240,255,0.25);
 }
 
-/* EXPAND AREA */
+/* EXPAND ANIMATION */
 .expand{
 max-height:0;
 overflow:hidden;
@@ -91,11 +91,11 @@ margin-top:10px;
 }
 
 .card.active .expand{
-max-height:200px;
-opacity:0.8;
+max-height:300px;
+opacity:0.85;
 }
 
-/* ===== CONTACT 3D STAINLESS CARD ===== */
+/* ===== CONTACT CARD (3D STEEL) ===== */
 .contact-card{
 width:320px;
 padding:40px;
@@ -105,14 +105,8 @@ border:1px solid rgba(255,255,255,0.2);
 box-shadow:0 20px 60px rgba(0,0,0,0.7);
 transform-style:preserve-3d;
 transition:0.2s;
-position:relative;
 }
 
-.contact-card:hover{
-box-shadow:0 30px 80px rgba(0,240,255,0.15);
-}
-
-/* ===== BUTTON ===== */
 .btn{
 margin-top:20px;
 padding:12px 30px;
@@ -136,31 +130,61 @@ cursor:pointer;
 <p>We build high-performance digital systems that turn attention into revenue.</p>
 </section>
 
-<!-- SERVICES -->
+<!-- SERVICES (UPDATED) -->
 <section>
 <h1>Services</h1>
 
 <div class="grid">
 
 <div class="card">
-Web Development
-<div class="expand">Fast, scalable, conversion-focused websites.</div>
+Website Development
+<div class="expand">
+Fast, conversion-focused websites built for real business growth.<br><br>
+✔ Mobile responsive<br>
+✔ SEO-ready structure<br>
+✔ Speed optimized<br>
+✔ Hosting setup
+</div>
 </div>
 
 <div class="card">
 Branding
-<div class="expand">Premium identity systems that position businesses.</div>
+<div class="expand">
+Premium brand identity systems that make your business look trustworthy and high-end.<br><br>
+✔ Logo direction<br>
+✔ Visual identity<br>
+✔ Color systems<br>
+✔ Brand consistency
+</div>
 </div>
 
 <div class="card">
 SEO & Growth
-<div class="expand">Ranking systems, funnels, automation & scaling.</div>
+<div class="expand">
+We help your website rank on Google and bring organic traffic.<br><br>
+✔ Keyword setup<br>
+✔ On-page SEO<br>
+✔ Ranking strategy<br>
+✔ Traffic growth systems
+</div>
+</div>
+
+<div class="card">
+📍 Google Maps Boosting
+<div class="expand">
+We optimize your Google Business Profile so your business shows up higher in local searches like “near me”.<br><br>
+✔ Google Business setup<br>
+✔ Category optimization<br>
+✔ Local keyword targeting<br>
+✔ Review strategy<br>
+✔ Map ranking improvement
+</div>
 </div>
 
 </div>
 </section>
 
-<!-- PRICING (TAP TO EXPAND) -->
+<!-- PRICING -->
 <section>
 <h1>Pricing</h1>
 
@@ -169,7 +193,7 @@ SEO & Growth
 <div class="card" onclick="toggle(this)">
 🟢 Entry
 <div class="expand">
-R799/month<br>
+R799/month<br><br>
 ✔ Website<br>
 ✔ Hosting<br>
 ✔ SEO<br>
@@ -180,7 +204,7 @@ R799/month<br>
 <div class="card" onclick="toggle(this)">
 🔵 Growth
 <div class="expand">
-R1399/month<br>
+R1399/month<br><br>
 ✔ Booking System<br>
 ✔ WhatsApp Integration<br>
 ✔ Lead Tracking
@@ -190,7 +214,7 @@ R1399/month<br>
 <div class="card" onclick="toggle(this)">
 🟣 Premium
 <div class="expand">
-R2199/month<br>
+R2199/month<br><br>
 ✔ Funnels<br>
 ✔ Advanced SEO<br>
 ✔ Strategy Calls<br>
@@ -243,35 +267,35 @@ scene.add(stars);
 
 camera.position.z=5;
 
-/* ===== CURSOR PARALLAX (FIXED + STRONGER) ===== */
-let mouseX=0,mouseY=0;
+/* ===== CURSOR MOTION + GALAXY PARALLAX ===== */
+let mx=0,my=0;
 
 document.addEventListener("mousemove",(e)=>{
-mouseX = (e.clientX/window.innerWidth - 0.5);
-mouseY = (e.clientY/window.innerHeight - 0.5);
+mx = (e.clientX/window.innerWidth - 0.5);
+my = (e.clientY/window.innerHeight - 0.5);
 
-/* CONTACT CARD 3D TILT */
+/* 3D CONTACT CARD TILT */
 let card=document.getElementById("contactCard");
 if(card){
 card.style.transform = `
-rotateY(${mouseX * 20}deg)
-rotateX(${-mouseY * 20}deg)
+rotateY(${mx*20}deg)
+rotateX(${-my*20}deg)
 `;
 }
 });
 
-/* ===== ANIMATE GALAXY ===== */
+/* ===== ANIMATION LOOP ===== */
 function animate(){
 requestAnimationFrame(animate);
 
-stars.rotation.y += 0.0005 + mouseX * 0.0002;
-stars.rotation.x += mouseY * 0.0002;
+stars.rotation.y += 0.0005 + mx*0.0002;
+stars.rotation.x += my*0.0002;
 
 renderer.render(scene,camera);
 }
 animate();
 
-/* ===== RESIZE FIX ===== */
+/* RESIZE */
 window.addEventListener("resize",()=>{
 camera.aspect=innerWidth/innerHeight;
 camera.updateProjectionMatrix();
