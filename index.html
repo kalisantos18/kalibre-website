@@ -318,8 +318,9 @@ footer{
     <a href="#seo">SEO</a>
     <a href="#branding">Branding</a>
     <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
-  </div>
+ </div>
 </nav>
 
 <!-- HERO -->
@@ -334,8 +335,10 @@ footer{
     </div>
     <div class="hero-stats">
       <div class="stat"><div class="stat-num">3x</div><div class="stat-label">Avg Traffic Growth</div></div>
-      <div class="stat"><div class="stat-num">24h</div><div class="stat-label">Response Time</div></div>
-    </div>
+      <div class="stat"><div class="stat-num">6h</div><div class="stat-label">Response Time</div></div>
+      <div class="stat"><div class="stat-num">99%</div><div class="stat-label">UpTime</div></div>
+
+ </div>
   </div>
 </section>
 
@@ -657,7 +660,498 @@ footer{
     </table>
   </div>
 </section>
+<!-- ===== KALIBRE DIGITAL LABS — FAQ ACCORDION SECTION ===== -->
+<!-- Paste this entire block just before your closing </body> tag  -->
+<!-- TIP: Place it between your #pricing section and #contact section in the HTML -->
 
+<style>
+#faq {
+  min-height: auto;
+  padding: 100px 8% 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  margin-top: 60px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.faq-left-sticky {
+  position: sticky;
+  top: 120px;
+}
+
+.faq-tagline {
+  font-size: 0.85rem;
+  opacity: 0.45;
+  line-height: 1.8;
+  margin-top: 20px;
+  max-width: 280px;
+}
+
+.faq-contact-nudge {
+  margin-top: 36px;
+  padding: 24px;
+  border-radius: 18px;
+  background: rgba(0,240,255,0.04);
+  border: 1px solid rgba(0,240,255,0.12);
+}
+
+.faq-contact-nudge p {
+  font-size: 0.82rem;
+  opacity: 0.55;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.faq-contact-nudge a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--cyan);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: gap 0.2s;
+}
+
+.faq-contact-nudge a:hover { gap: 12px; }
+
+/* Accordion */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+
+.faq-item:first-child {
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.faq-question {
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Poppins', sans-serif;
+  transition: 0.2s;
+}
+
+.faq-question:hover .faq-q-text { color: var(--cyan); }
+
+.faq-q-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.4;
+  transition: color 0.25s;
+}
+
+.faq-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  background: rgba(255,255,255,0.5);
+  border-radius: 2px;
+  transition: background 0.25s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
+}
+
+.faq-icon::before { width: 12px; height: 1.5px; }
+.faq-icon::after  { width: 1.5px; height: 12px; }
+
+.faq-item.open .faq-icon {
+  background: rgba(0,240,255,0.1);
+  border-color: rgba(0,240,255,0.4);
+  transform: rotate(45deg);
+}
+
+.faq-item.open .faq-icon::before,
+.faq-item.open .faq-icon::after {
+  background: var(--cyan);
+}
+
+.faq-item.open .faq-q-text { color: var(--cyan); }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+  opacity: 0;
+}
+
+.faq-item.open .faq-answer {
+  opacity: 1;
+}
+
+.faq-answer-inner {
+  padding: 0 0 24px;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.85;
+}
+
+.faq-answer-inner strong {
+  color: rgba(255,255,255,0.75);
+  font-weight: 600;
+}
+
+.faq-answer-inner a {
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,240,255,0.25);
+  transition: border-color 0.2s;
+}
+
+.faq-answer-inner a:hover { border-color: var(--cyan); }
+
+/* Category pills */
+.faq-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.faq-filter {
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: rgba(255,255,255,0.4);
+  font-family: 'Poppins', sans-serif;
+  transition: 0.25s;
+}
+
+.faq-filter:hover {
+  color: rgba(255,255,255,0.75);
+  border-color: rgba(255,255,255,0.25);
+}
+
+.faq-filter.active {
+  background: rgba(0,240,255,0.08);
+  border-color: rgba(0,240,255,0.35);
+  color: var(--cyan);
+}
+
+.faq-item[data-cat].hidden { display: none; }
+
+/* Highlight number badges in answers */
+.faq-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: rgba(0,240,255,0.08);
+  border: 1px solid rgba(0,240,255,0.2);
+  color: var(--cyan);
+  margin: 0 2px;
+}
+</style>
+
+<!-- FAQ SECTION — drop this between #pricing and #contact -->
+<section id="faq">
+  <div class="reveal">
+    <div class="section-label">Got Questions?</div>
+    <h2>Frequently Asked <span style="color:var(--cyan)">Questions</span></h2>
+    <p class="subtitle">Everything you need to know before getting started. Can't find your answer? <a href="#contact" style="color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(0,240,255,0.3);">Just ask us.</a></p>
+  </div>
+
+  <div class="faq-grid reveal">
+
+    <!-- Left sticky column -->
+    <div class="faq-left-sticky">
+      <div class="section-label" style="margin-bottom:10px;">Browse by topic</div>
+      <div class="faq-filters">
+        <button class="faq-filter active" data-filter="all">All</button>
+        <button class="faq-filter" data-filter="pricing">Pricing</button>
+        <button class="faq-filter" data-filter="seo">SEO</button>
+        <button class="faq-filter" data-filter="websites">Websites</button>
+        <button class="faq-filter" data-filter="process">Process</button>
+      </div>
+
+      <p class="faq-tagline">We believe in full transparency — no hidden fees, no confusing jargon, no locked-in contracts you can't get out of.</p>
+
+      <div class="faq-contact-nudge">
+        <p>Still have a question? We respond within 6 hours on business days.</p>
+        <a href="https://wa.me/27625411075" target="_blank" rel="noopener">
+          WhatsApp us directly
+          <span style="font-size:1rem;">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right accordion column -->
+    <div class="faq-list" id="faqList">
+
+      <!-- PRICING -->
+      <div class="faq-item" data-cat="pricing">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Are there any setup fees or hidden costs?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            No hidden costs — what you see on the pricing page is what you pay. The monthly fee covers everything listed in your package including hosting, SSL, and ongoing support. The only time additional costs arise is if you request work that falls significantly outside your package scope, and we'll always quote you before touching anything extra.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="pricing">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Can I upgrade or downgrade my package later?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            Absolutely. You can upgrade at any time — we'll prorate the difference and get the extra features live within <strong>3–5 business days</strong>. Downgrading is also possible at the end of any billing cycle. We want you on the right plan for where your business actually is, not locked into something that doesn't fit.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="pricing">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Is there a minimum contract period?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            We recommend a minimum of <strong>3 months</strong> for SEO-inclusive packages — this is because SEO results take time to compound and you won't see the full impact in under 90 days. That said, we don't believe in locking clients in against their will. If you're unhappy for any reason, let's talk first. We'd rather fix the problem than lose a client.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="pricing">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Do you offer once-off website builds without a monthly retainer?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            Yes — we can build a website as a once-off project. Pricing starts from <span class="faq-badge">R 4 500</span> for a basic 5-page site, delivered within 7–10 business days. You'd then handle hosting yourself, or we can set up hosting for a small monthly fee. <a href="#contact">Get in touch</a> and we'll scope it out for you.
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO -->
+      <div class="faq-item" data-cat="seo">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">How long before I see SEO results?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            Honest answer: <strong>3–6 months</strong> for meaningful ranking improvements, <strong>6–12 months</strong> for consistent, compounding traffic growth. SEO is not a quick fix — it's a long-term asset. Businesses that stick with it past month 6 consistently outperform competitors who gave up early. We'll send you monthly ranking reports so you can see progress clearly, not just take our word for it.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="seo">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">What's the difference between on-page and off-page SEO?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            <strong>On-page SEO</strong> is everything we control on your website — titles, headings, content, page speed, mobile-friendliness, and internal links. <strong>Off-page SEO</strong> is what happens outside your site — mainly getting other credible websites to link back to yours (backlinks). Google treats backlinks like votes of confidence. Our Professional and Authority packages include both, which is why they produce stronger long-term results.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="seo">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Do you guarantee first-page Google rankings?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            No — and any agency that guarantees a specific ranking is lying to you. Google's algorithm considers hundreds of signals and changes regularly. What we <strong>do</strong> guarantee is transparent, ethical SEO work that follows Google's guidelines, monthly reporting so you always know what's happening, and a proven process that consistently improves visibility over time. We'll target realistic keywords and track your progress honestly.
+          </div>
+        </div>
+      </div>
+
+      <!-- WEBSITES -->
+      <div class="faq-item" data-cat="websites">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">How long does it take to build my website?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            A standard website takes <strong>5–10 business days</strong> from receiving your content (logo, copy, images). If you need us to write the content as well, add another 3–5 days. More complex builds with booking systems, funnels, or custom functionality take <strong>2–3 weeks</strong>. We'll give you a firm timeline at the start of your project and stick to it.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="websites">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Will I own my website and domain?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            Yes — <strong>always</strong>. Your domain and website files belong to you. We never hold your assets hostage. If you ever decide to move to a different provider, we'll hand over everything cleanly. We believe in earning your business every month, not trapping you.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="websites">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Can you redesign my existing website instead of building from scratch?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            Absolutely. We do full redesigns, partial refreshes, and speed/SEO overhauls on existing sites. We'll audit what you have, identify what's costing you conversions, and recommend the most cost-effective path forward. <a href="#contact">Send us your current URL</a> and we'll give you honest feedback within 24 hours.
+          </div>
+        </div>
+      </div>
+
+      <!-- PROCESS -->
+      <div class="faq-item" data-cat="process">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">How do we get started?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            Simple — <a href="#contact">reach out via WhatsApp or email</a>. We'll have a quick discovery chat to understand your business, goals, and budget. From there we'll recommend the right package and send you a clear proposal. No pushy sales tactics, no obligation. Most clients are onboarded and briefed within <strong>48 hours</strong> of first contact.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="process">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">How do I provide feedback and request changes?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            We use a simple shared document or WhatsApp thread — whatever works for you. Every package includes a revision round so you can review the first draft and give consolidated feedback. Authority package clients also get monthly strategy calls where we walk through everything together. We keep communication direct and fast — no ticket systems, no waiting on hold.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="process">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-q-text">Do I need to provide content or do you write it?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <div class="faq-answer-inner">
+            We're flexible. If you have existing copy, great — we'll refine and optimise it for SEO. If you're starting from scratch, we can write your website content as an add-on service. We'll interview you about your business, customers, and goals, then craft copy that converts. <strong>Good copy is the most underestimated part of a website</strong> — it's what turns visitors into paying clients.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  /* Accordion */
+  document.querySelectorAll('.faq-question').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const item = this.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+
+      /* Close all others */
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+        if(openItem !== item){
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-question').setAttribute('aria-expanded','false');
+          openItem.querySelector('.faq-answer').style.maxHeight = '0';
+        }
+      });
+
+      if(isOpen){
+        item.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        answer.style.maxHeight = '0';
+      } else {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* Category filter */
+  document.querySelectorAll('.faq-filter').forEach(function(filterBtn){
+    filterBtn.addEventListener('click', function(){
+      const cat = this.dataset.filter;
+
+      document.querySelectorAll('.faq-filter').forEach(function(b){ b.classList.remove('active'); });
+      this.classList.add('active');
+
+      /* Close all open items first */
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-question').setAttribute('aria-expanded','false');
+        openItem.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+
+      document.querySelectorAll('.faq-item[data-cat]').forEach(function(item){
+        if(cat === 'all' || item.dataset.cat === cat){
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  /* Open first item by default */
+  var first = document.querySelector('.faq-item');
+  if(first){
+    first.classList.add('open');
+    first.querySelector('.faq-question').setAttribute('aria-expanded','true');
+    var ans = first.querySelector('.faq-answer');
+    ans.style.maxHeight = ans.scrollHeight + 'px';
+  }
+})();
+</script>
+<!-- ===== END FAQ SECTION ===== -->
 <!-- CONTACT -->
 <section id="contact">
   <div class="reveal">
@@ -685,7 +1179,7 @@ footer{
         <div class="contact-icon">🕐</div>
         <div class="contact-info">
           <span>Response Time</span>
-          <p>Within 24 hours</p>
+          <p>Within 6 hours</p>
         </div>
       </div>
       <div class="contact-cta">
@@ -762,6 +1256,247 @@ const obs=new IntersectionObserver((entries)=>{
 },{threshold:0.1});
 reveals.forEach(r=>obs.observe(r));
 </script>
+<script>
+(function(){
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:99998;';
+  canvas.width = innerWidth; canvas.height = innerHeight;
+  document.body.appendChild(canvas);
+  window.addEventListener('resize',()=>{ canvas.width=innerWidth; canvas.height=innerHeight; });
+
+  const dot = document.createElement('div');
+  dot.style.cssText = 'position:fixed;width:14px;height:14px;border-radius:50%;background:#00f0ff;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 10px #00f0ff,0 0 22px rgba(0,240,255,0.8),0 0 50px rgba(0,240,255,0.3);transition:transform 0.1s;';
+  document.body.appendChild(dot);
+  document.body.style.cursor = 'none';
+  document.querySelectorAll('a,button,[role=button],.btn-primary,.btn-outline,.service-flip,.price-card,.nav-links a').forEach(el=>el.style.cursor='none');
+
+  const ctx = canvas.getContext('2d');
+  const particles = [];
+  let mx=-200,my=-200,vx=0,vy=0;
+
+  function cyanFlame(t,a){
+    const g = Math.round(200 + t*55);
+    const b = 255;
+    const r = Math.round(t * 40);
+    return `rgba(${r},${g},${b},${a})`;
+  }
+
+  function purpleTrail(t,a){
+    const r = Math.round(80 + t*175);
+    const g = Math.round(0 + t*20);
+    const b = Math.round(255 - t*80);
+    return `rgba(${r},${g},${b},${a})`;
+  }
+
+  document.addEventListener('mousemove',e=>{
+    vx=e.clientX-mx; vy=e.clientY-my;
+    const speed=Math.sqrt(vx*vx+vy*vy);
+    mx=e.clientX; my=e.clientY;
+    dot.style.left=mx+'px'; dot.style.top=my+'px';
+
+    const count=Math.min(6,2+Math.floor(speed/6));
+    for(let i=0;i<count;i++){
+      const isFront = Math.random()<0.55;
+      const spread = isFront ? speed*0.15 : speed*0.5;
+      const lag = isFront ? 0 : 1+Math.random()*2;
+      particles.push({
+        x: mx-(vx*lag*0.08)+(Math.random()-.5)*spread,
+        y: my-(vy*lag*0.08)+(Math.random()-.5)*spread,
+        r: isFront ? 3+Math.random()*(4+speed*0.09) : 2+Math.random()*(3+speed*0.06),
+        life:1,
+        decay: isFront ? 0.025+Math.random()*0.02 : 0.014+Math.random()*0.016,
+        vx:(Math.random()-.5)*0.8 - vx*0.03,
+        vy:(Math.random()-.5)*0.8 - vy*0.03 - 0.5,
+        front: isFront
+      });
+    }
+  });
+
+  document.addEventListener('mousedown',()=>{
+    dot.style.transform='translate(-50%,-50%) scale(0.6)';
+    for(let i=0;i<22;i++){
+      const a=(i/22)*Math.PI*2, sp=2+Math.random()*4;
+      particles.push({x:mx,y:my,r:3+Math.random()*5,life:1,decay:0.015+Math.random()*0.018,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-0.8,front:i%2===0});
+    }
+  });
+  document.addEventListener('mouseup',()=>dot.style.transform='translate(-50%,-50%) scale(1)');
+
+  function loop(){
+    requestAnimationFrame(loop);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(let i=particles.length-1;i>=0;i--){
+      const p=particles[i];
+      p.life-=p.decay; p.x+=p.vx; p.y+=p.vy;
+      p.vx*=0.96; p.vy*=0.96; p.r*=0.982;
+      if(p.life<=0||p.r<0.25){particles.splice(i,1);continue;}
+      const t=1-p.life;
+      const colorFn = p.front ? cyanFlame : purpleTrail;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=colorFn(t,p.life*0.9); ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*0.4,0,Math.PI*2);
+      ctx.fillStyle=colorFn(0,p.life*0.6); ctx.fill();
+    }
+  }
+  loop();
+})();
+</script>
+<!-- ===== KALIBRE DIGITAL LABS — ENTERPRISE COOKIE SYSTEM ===== -->
+
+<style>
+/* ===== Banner ===== */
+#kdCookie{position:fixed;bottom:0;left:0;right:0;z-index:9990;padding:0 8%;transform:translateY(110%);transition:transform .5s cubic-bezier(.16,1,.3,1);pointer-events:none}
+#kdCookie.kd-show{transform:translateY(0);pointer-events:all}
+#kdCookieInner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:0 auto;max-width:1400px;background:rgba(10,10,18,.88);backdrop-filter:blur(24px);border:1px solid rgba(0,240,255,.15);border-bottom:none;border-radius:20px 20px 0 0;padding:22px 32px;box-shadow:0 -8px 60px rgba(0,0,0,.6)}
+.kd-cookie-left{display:flex;align-items:flex-start;gap:18px;flex:1;min-width:260px}
+.kd-cookie-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;background:rgba(0,240,255,.08);border:1px solid rgba(0,240,255,.18);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-top:2px}
+.kd-cookie-label{font-family:Poppins,sans-serif;font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00f0ff}
+.kd-cookie-text p{font-family:Poppins,sans-serif;font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.7;margin:4px 0 0}
+.kd-cookie-btns{display:flex;gap:10px;flex-wrap:wrap}
+#kdCookieDecline,#kdCookieManage{font-family:Poppins,sans-serif;padding:10px 22px;border-radius:50px;font-size:.8rem;background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);cursor:pointer}
+#kdCookieAccept{font-family:Poppins,sans-serif;padding:10px 26px;border-radius:50px;font-size:.8rem;font-weight:700;background:#00f0ff;color:#000;border:none;cursor:pointer}
+#kdCookieAccept:hover{box-shadow:0 8px 28px rgba(0,240,255,.35)}
+
+/* ===== Modal ===== */
+#kdCookieModal{position:fixed;inset:0;z-index:9995;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.7);opacity:0;pointer-events:none;transition:.3s;padding:0 16px}
+#kdCookieModal.kd-open{opacity:1;pointer-events:all}
+#kdCookieModalBox{background:#0d0d16;border:1px solid rgba(0,240,255,.15);border-radius:24px 24px 0 0;padding:36px;width:100%;max-width:560px;transform:translateY(40px);transition:.4s cubic-bezier(.16,1,.3,1)}
+#kdCookieModal.kd-open #kdCookieModalBox{transform:translateY(0)}
+.kd-toggle-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.kd-switch{position:relative;width:44px;height:24px}
+.kd-switch input{opacity:0;width:0;height:0}
+.kd-slider{position:absolute;inset:0;border-radius:50px;background:rgba(255,255,255,.1)}
+.kd-slider:before{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.3s}
+.kd-switch input:checked+.kd-slider{background:rgba(0,240,255,.2)}
+.kd-switch input:checked+.kd-slider:before{transform:translateX(20px);background:#00f0ff}
+#kdSavePrefs{margin-top:20px;width:100%;padding:12px;border-radius:50px;font-weight:700;background:#00f0ff;color:#000;border:none;cursor:pointer}
+
+/* Reopen Button */
+#kdReopen{position:fixed;bottom:20px;right:20px;z-index:9980;background:#0d0d16;border:1px solid rgba(0,240,255,.2);color:#00f0ff;padding:10px 18px;border-radius:50px;font-size:.75rem;cursor:pointer}
+</style>
+
+<!-- Banner -->
+<div id="kdCookie">
+  <div id="kdCookieInner">
+    <div class="kd-cookie-left">
+      <div class="kd-cookie-icon">🍪</div>
+      <div class="kd-cookie-text">
+        <div class="kd-cookie-label">We use cookies</div>
+        <p>We use cookies to improve experience and analyse traffic. You can manage preferences anytime.</p>
+      </div>
+    </div>
+    <div class="kd-cookie-btns">
+      <button id="kdCookieDecline">Decline</button>
+      <button id="kdCookieManage">Manage</button>
+      <button id="kdCookieAccept">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="kdCookieModal">
+  <div id="kdCookieModalBox">
+    <h3 style="color:#fff;font-family:Poppins">Cookie Preferences</h3>
+    <div class="kd-toggle-row">
+      <span style="color:#fff">Essential (Always On)</span>
+      <span style="color:#00f0ff;font-size:.75rem">Required</span>
+    </div>
+    <div class="kd-toggle-row">
+      <span style="color:#fff">Analytics</span>
+      <label class="kd-switch">
+        <input type="checkbox" id="kdAnalytics">
+        <span class="kd-slider"></span>
+      </label>
+    </div>
+    <div class="kd-toggle-row">
+      <span style="color:#fff">Marketing</span>
+      <label class="kd-switch">
+        <input type="checkbox" id="kdMarketing">
+        <span class="kd-slider"></span>
+      </label>
+    </div>
+    <button id="kdSavePrefs">Save Preferences</button>
+  </div>
+</div>
+
+<button id="kdReopen">Cookie Settings</button>
+
+<script>
+(function(){
+const COOKIE_KEY='kd_cookie_consent';
+const GA_ID='G-XXXXXXX'; // <-- REPLACE WITH YOUR REAL GA4 ID
+
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied'});
+
+function setCookie(val){
+ const d=new Date();
+ d.setFullYear(d.getFullYear()+1);
+ document.cookie=COOKIE_KEY+'='+encodeURIComponent(JSON.stringify(val))+
+ ';expires='+d.toUTCString()+';path=/;SameSite=Lax;Secure';
+}
+
+function getCookie(){
+ const m=document.cookie.match(new RegExp('(?:^|; )'+COOKIE_KEY+'=([^;]*)'));
+ return m?JSON.parse(decodeURIComponent(m[1])):null;
+}
+
+function loadGA(){
+ if(window.gaLoaded) return;
+ const s=document.createElement('script');
+ s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;
+ s.async=true;
+ document.head.appendChild(s);
+ gtag('js',new Date());
+ gtag('config',GA_ID);
+ window.gaLoaded=true;
+}
+
+function applyConsent(p){
+ setCookie(p);
+ document.getElementById('kdCookie').classList.remove('kd-show');
+ document.getElementById('kdCookieModal').classList.remove('kd-open');
+
+ if(p.analytics){
+   gtag('consent','update',{analytics_storage:'granted'});
+   loadGA();
+ }
+ if(p.marketing){
+   gtag('consent','update',{ad_storage:'granted'});
+ }
+}
+
+window.addEventListener('load',function(){
+ const existing=getCookie();
+ if(!existing){
+   setTimeout(()=>document.getElementById('kdCookie').classList.add('kd-show'),1200);
+ } else {
+   applyConsent(existing);
+ }
+});
+
+document.getElementById('kdCookieAccept').onclick=function(){
+ applyConsent({essential:true,analytics:true,marketing:true});
+};
+document.getElementById('kdCookieDecline').onclick=function(){
+ applyConsent({essential:true,analytics:false,marketing:false});
+};
+document.getElementById('kdCookieManage').onclick=function(){
+ document.getElementById('kdCookieModal').classList.add('kd-open');
+};
+document.getElementById('kdSavePrefs').onclick=function(){
+ applyConsent({
+  essential:true,
+  analytics:document.getElementById('kdAnalytics').checked,
+  marketing:document.getElementById('kdMarketing').checked
+ });
+};
+document.getElementById('kdReopen').onclick=function(){
+ document.getElementById('kdCookieModal').classList.add('kd-open');
+};
+})();
+</script>
+
+<!-- ===== END ENTERPRISE COOKIE SYSTEM ===== -->
 </body>
 </html>
-
